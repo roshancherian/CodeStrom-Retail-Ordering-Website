@@ -1,33 +1,47 @@
-// 📝 Signup
-export const registerUser = async (data) => {
+let generatedOtp = null;
+
+// 📩 Send OTP
+export const sendOtp = async (email) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (data.password !== data.confirmPassword) {
-        reject("Passwords do not match");
-      } else {
-        // save user in localStorage
-        localStorage.setItem("user", JSON.stringify(data));
+      const savedUser = JSON.parse(localStorage.getItem("user"));
 
-        resolve({ message: "Signup Successful" });
+      if (savedUser && savedUser.email === email) {
+        generatedOtp = "123456"; // dummy OTP
+        console.log("OTP:", generatedOtp); // simulate sending email
+        resolve(true);
+      } else {
+        reject("Email not found");
       }
     }, 1000);
   });
 };
 
-// 🔐 Login
-export const loginUser = async ({ email, password }) => {
+// 🔐 Verify OTP
+export const verifyOtp = async (otp) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      const savedUser = JSON.parse(localStorage.getItem("user"));
-
-      if (
-        savedUser &&
-        savedUser.email === email &&
-        savedUser.password === password
-      ) {
-        resolve({ message: "Login Successful" });
+      if (otp === generatedOtp) {
+        resolve(true);
       } else {
-        reject("Invalid email or password");
+        reject("Invalid OTP");
+      }
+    }, 1000);
+  });
+};
+
+// 🔁 Reset Password
+export const resetPassword = async ({ password, confirmPassword }) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (password !== confirmPassword) {
+        reject("Passwords do not match");
+      } else {
+        const user = JSON.parse(localStorage.getItem("user"));
+        user.password = password;
+        localStorage.setItem("user", JSON.stringify(user));
+
+        resolve(true);
       }
     }, 1000);
   });
