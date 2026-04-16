@@ -5,9 +5,9 @@ const CartPage = () => {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    const items = getCartItems();
-    setCart(items);
-  }, []);
+  const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+  setCart(savedCart);
+}, []);
 
   const getTotal = () => {
     return cart.reduce(
