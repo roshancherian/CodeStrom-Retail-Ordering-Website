@@ -37,6 +37,7 @@ public class OrderService {
         order.setCreatedAt(LocalDateTime.now());
 
         orderRepo.save(order);
+
         cartRepo.deleteAll(cartItems);
 
         return order;

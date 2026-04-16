@@ -6,10 +6,8 @@ import com.example.retail.repository.OrderRepository;
 import com.example.retail.repository.UserRepository;
 import com.example.retail.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.*;
 
 @RestController
@@ -21,14 +19,20 @@ public class OrderController {
     private final UserRepository userRepo;
     private final OrderRepository repo;
 
+    // ✅ POST with request body
     @PostMapping
-    public Orders place() {
-        return service.placeOrder(1L); // ✅ pass userId
+    public Orders place(@RequestBody Map<String, Long> req) {
+
+        Long userId = req.get("userId");
+
+        return service.placeOrder(userId);
     }
 
+    // ✅ GET with parameter
     @GetMapping("/history")
-    public List<Orders> history() {
-        User user = userRepo.findById(1L).orElseThrow();
+    public List<Orders> history(@RequestParam Long userId) {
+
+        User user = userRepo.findById(userId).orElseThrow();
         return repo.findByUser(user);
     }
 }
