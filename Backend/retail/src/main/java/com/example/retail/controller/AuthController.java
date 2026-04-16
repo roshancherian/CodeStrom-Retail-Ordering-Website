@@ -1,13 +1,11 @@
 package com.example.retail.controller;
 
+import com.example.retail.dto.LoginRequest;
 import com.example.retail.entity.User;
 import com.example.retail.service.AuthService;
 import com.example.retail.service.PasswordService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -25,17 +23,17 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public User login(@RequestBody Map<String,String> req) {
-        return service.login(req.get("email"), req.get("password"));
+    public User login(@RequestBody LoginRequest request) {
+        return service.login(request.getEmail(), request.getPassword());
     }
 
     @PostMapping("/forgot-password")
-    public String forgot(@RequestBody Map<String,String> req) {
+    public String forgot(@RequestBody Map<String, String> req) {
         return passwordService.forgot(req.get("email"));
     }
 
     @PostMapping("/reset-password")
-    public String reset(@RequestBody Map<String,String> req) {
+    public String reset(@RequestBody Map<String, String> req) {
         passwordService.reset(req.get("token"), req.get("newPassword"));
         return "Password updated";
     }
