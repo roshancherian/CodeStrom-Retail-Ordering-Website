@@ -140,3 +140,39 @@ body {
 .dropdown p:hover {
   background: #f2f2f2;
 }
+
+.card img {
+  margin-bottom: 10px;
+}
+
+.card input[type="file"] {
+  margin-top: 10px;
+}
+
+td button {
+  padding: 4px 8px;
+  margin: 0 5px;
+  border: none;
+  background: #1976d2;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+td button:hover {
+  background: #0d47a1;
+}
+
+.home-btn {
+  margin-right: 10px;
+  padding: 6px 12px;
+  border: none;
+  background: #28a745;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.home-btn:hover {
+  background: #1e7e34;
+}

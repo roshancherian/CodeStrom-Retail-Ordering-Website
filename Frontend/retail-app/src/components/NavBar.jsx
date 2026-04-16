@@ -1,17 +1,21 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ProfileDropdown from "./ProfileDropdown";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="navbar">
-      {/* Left - App Name */}
+      {/* Left */}
       <div className="nav-left">
-        <h2>RetailApp</h2>
+        <h2 style={{ cursor: "pointer" }} onClick={() => navigate("/home")}>
+          RetailApp
+        </h2>
       </div>
 
-      {/* Center - Search */}
+      {/* Center */}
       <div className="nav-center">
         <input
           type="text"
@@ -20,8 +24,12 @@ const Navbar = () => {
         />
       </div>
 
-      {/* Right - Profile */}
+      {/* Right */}
       <div className="nav-right">
+        <button onClick={() => navigate("/home")} className="home-btn">
+          Home
+        </button>
+
         <div onClick={() => setOpen(!open)} className="profile">
           👤
         </div>
