@@ -6,13 +6,13 @@ const LoginPage = () => {
   const [message, setMessage] = useState("");
 
   const handleLogin = async (data) => {
-    try {
-      const res = await loginUser(data);
-      setMessage(res.message); // ✅ success
-    } catch (err) {
-      setMessage(err); // ❌ error
-    }
-  };
+  try {
+    await loginUser(data);
+    navigate("/home"); // ✅ MUST be this
+  } catch (err) {
+    setMessage(err);
+  }
+};
 
   return (
     <div className="page">
