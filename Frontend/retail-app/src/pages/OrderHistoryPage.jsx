@@ -10,15 +10,23 @@ function OrderHistoryPage() {
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="order-container">
       <h2>📜 Order History</h2>
 
       {orders.length === 0 ? (
         <p>No orders yet</p>
       ) : (
-        orders.map(o => (
-          <div key={o.id} style={{ marginBottom: "10px" }}>
-            Order ID: {o.id} | ₹{o.totalAmt} | {o.status}
+        orders.map((o) => (
+          <div className="order-card" key={o.id}>
+            
+            <h3>Order #{o.id}</h3>
+
+            <p>💰 Amount: ₹{o.totalAmt}</p>
+
+            <p className={`status ${o.status.toLowerCase()}`}>
+              {o.status}
+            </p>
+
           </div>
         ))
       )}

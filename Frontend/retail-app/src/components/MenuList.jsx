@@ -8,20 +8,30 @@ function MenuList({ restId }) {
 
   useEffect(() => {
     getMenuByRestaurant(restId).then(res => setMenu(res.data));
-  }, []);
+  }, [restId]);
 
-  const add = async (id) => {
-    await addToCart({ userId: user.id, menuId: id, qty: 1 });
-    alert("Added!");
+  const handleAdd = async (menuId) => {
+    await addToCart({
+      userId: user.id,
+      menuId: menuId,
+      qty: 1
+    });
+    alert("Added to cart");
   };
 
   return (
-    <div className="grid">
-      {menu.map(m => (
-        <div className="card" key={m.id}>
-          <h4>{m.name}</h4>
-          <p>₹{m.price}</p>
-          <button onClick={() => add(m.id)}>Add</button>
+    <div className="menu-container">
+      {menu.map((item) => (
+        <div className="menu-card" key={item.id}>
+          
+          <h3>{item.name}</h3>
+
+          <p className="price">₹{item.price}</p>
+
+          <button onClick={() => handleAdd(item.id)}>
+            Add to Cart
+          </button>
+
         </div>
       ))}
     </div>

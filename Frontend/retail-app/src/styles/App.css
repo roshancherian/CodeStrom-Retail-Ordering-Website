@@ -150,3 +150,74 @@ body {
   color: orange;
   font-weight: bold;
 }
+
+/* Menu container */
+.menu-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Card */
+.menu-card {
+  background: white;
+  width: 220px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Hover */
+.menu-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 20px rgba(0,0,0,0.2);
+}
+
+/* Price */
+.price {
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+/* Button */
+.menu-card button {
+  background: orange;
+  border: none;
+  padding: 8px;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+/* Container */
+.order-container {
+  padding: 20px;
+}
+
+/* Card */
+.order-card {
+  background: white;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+  width: 300px;
+}
+
+/* Status */
+.status {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Status colors */
+.status.placed {
+  color: green;
+}
+
+.status.cancelled {
+  color: red;
+}
