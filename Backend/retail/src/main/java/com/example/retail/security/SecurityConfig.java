@@ -24,14 +24,15 @@ public class SecurityConfig {
                                 "/v3/api-docs/**",
                                 "/api/auth/**",
                                 "/h2-console/**"
-                        ).permitAll()   // ✅ allow these
-                        .anyRequest().permitAll()   // 🔥 allow ALL (testing only)
+                        ).permitAll()
+                        .anyRequest().permitAll()
                 )
-
+                .headers(headers ->
+                        headers.frameOptions(frame -> frame.disable())
+                )
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
-
 
         return http.build();
     }
