@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "../styles/login.css";
 import { useNavigate } from "react-router-dom";
+import "../styles/login.css";
 
 const LoginCard = ({ onLogin }) => {
   const [email, setEmail] = useState("");
@@ -11,6 +11,7 @@ const navigate = useNavigate();
     e.preventDefault();
     onLogin({ email, password });
   };
+  
 
   return (
     <div className="card">
@@ -44,7 +45,8 @@ const navigate = useNavigate();
 >
   Sign Up
 </button>
-      <button className="btn link">Forgot Password?</button>
+      <button className="btn link"
+      onClick={() => navigate("/forgot-password")}>Forgot Password?</button>
     </div>
   );
 };
