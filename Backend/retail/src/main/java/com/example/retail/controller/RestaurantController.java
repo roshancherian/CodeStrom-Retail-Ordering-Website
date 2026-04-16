@@ -1,4 +1,10 @@
 package com.example.retail.controller;
+
+import com.example.retail.entity.Restaurant;
+import com.example.retail.repository.RestaurantRepository;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/restaurants")
 @RequiredArgsConstructor
