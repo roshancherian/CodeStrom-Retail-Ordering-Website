@@ -1,6 +1,9 @@
 package com.example.retail.entity;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 public class Orders {

@@ -1,4 +1,16 @@
 package com.example.retail.service;
+import com.example.retail.entity.CartItem;
+import com.example.retail.entity.Orders;
+import com.example.retail.entity.User;
+import com.example.retail.repository.CartRepository;
+import com.example.retail.repository.OrderRepository;
+import com.example.retail.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor

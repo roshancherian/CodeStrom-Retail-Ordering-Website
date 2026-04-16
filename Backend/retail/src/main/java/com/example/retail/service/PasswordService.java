@@ -1,11 +1,21 @@
 package com.example.retail.service;
+import com.example.retail.entity.PasswordResetToken;
+import com.example.retail.entity.User;
+import com.example.retail.repository.PasswordResetTokenRepository;
+import com.example.retail.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class PasswordService {
 
     private final UserRepository userRepo;
-    private final TokenRepository tokenRepo;
+    private final PasswordResetTokenRepository tokenRepo;
     private final PasswordEncoder encoder;
 
     public String forgot(String email) {
