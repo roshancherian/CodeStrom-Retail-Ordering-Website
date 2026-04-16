@@ -7,17 +7,16 @@ const LoginPage = () => {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async (data) => {
-    try {
-      const res = await loginUser(data);
-      setMessage(res.message);
-
-      // ✅ redirect to home after login
-      navigate("/home");
-    } catch (err) {
-      setMessage(err);
-    }
-  };
+ const handleLogin = async (data) => {
+  try {
+    const res = await loginUser(data);
+    console.log("SUCCESS"); // 👈 add this
+    navigate("/home");
+  } catch (err) {
+    console.log("ERROR:", err); // 👈 add this
+    setMessage(err);
+  }
+};
 
   return (
     <div className="page">
