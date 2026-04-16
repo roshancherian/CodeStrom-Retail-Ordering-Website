@@ -1,40 +1,43 @@
 package com.example.retail.controller;
 
+import com.example.retail.dto.CartRequest;
 import com.example.retail.entity.CartItem;
-import com.example.retail.entity.MenuItem;
-import com.example.retail.entity.User;
-import com.example.retail.repository.CartRepository;
-import com.example.retail.repository.MenuRepository;
-import com.example.retail.repository.UserRepository;
+import com.example.retail.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/cart")
 @RequiredArgsConstructor
 public class CartController {
 
-    private final CartRepository repo;
-    private final MenuRepository menuRepo;
-    private final UserRepository userRepo;
+    private final CartService service;
 
+    // ✅ Add to cart
     @PostMapping
-    public CartItem add(@RequestBody Map<String,Integer> req) {
-        User user = userRepo.findById(1L).orElseThrow();
-
-        MenuItem item = menuRepo.findById(req.get("menuId").longValue()).orElseThrow();
-
-        CartItem cart = new CartItem();
-        cart.setUser(user);
-        cart.setMenuItem(item);
-        cart.setQuantity(req.get("qty"));
-
-        return repo.save(cart);
+    public CartItem add(@RequestBody CartRequest req) {
+        return service.addToCart(req.getUserId(), req.getMenuId(), req.getQty());
     }
 
+    // ✅ Get cart by user
     @GetMapping
-    public List<CartItem> get() {
-        return repo.findAll();
+    public List<CartItem> get(@RequestParam Long userId) {
+        return service.getCart(userId);
+    }
+
+    // ✅ Update quantity
+    @PutMapping("/{id}")
+    public CartItem update(@PathVariable Long id,
+                           @RequestParam int qty) {
+        return service.update(id, qty);
+    }
+
+    // ✅ Delete item
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id) {
+        service.delete(id);
+        return "Deleted successfully";
     }
 }
