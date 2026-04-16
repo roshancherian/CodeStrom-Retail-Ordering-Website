@@ -11,12 +11,13 @@ function RestaurantList() {
   }, []);
 
   return (
-    <div className="grid">
-      {data.map(r => (
-        <div className="card"
+    <div className="restaurant-container">
+      {data.map((r) => (
+        <div
+          className="restaurant-card"
           key={r.id}
-          onClick={() => navigate(`/menu/${r.id}`)}>
-
+          onClick={() => navigate(`/menu/${r.id}`)}
+        >
           <h3>{r.name}</h3>
           <p>View Menu →</p>
         </div>
