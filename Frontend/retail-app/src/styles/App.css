@@ -1,42 +1,117 @@
+/* Reset */
 body {
-  font-family: Arial;
   margin: 0;
+  font-family: Arial, sans-serif;
   background: #f5f5f5;
 }
 
+/* Navbar */
 .navbar {
-  display: flex;
-  justify-content: space-between;
   background: orange;
-  padding: 10px;
-  color: white;
-}
-
-.navbar a {
-  margin: 10px;
-  color: white;
-  text-decoration: none;
-}
-
-.grid {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-  flex-wrap: wrap;
-}
-
-.card {
-  background: white;
   padding: 15px;
-  border-radius: 10px;
-  cursor: pointer;
-  width: 200px;
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-button {
+.logo {
+  cursor: pointer;
+}
+
+/* Center login */
+.login-container {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card */
+.login-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 320px;
+  box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* Inputs */
+.login-card input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Button */
+.login-card button {
+  width: 100%;
+  padding: 10px;
   background: orange;
   border: none;
-  padding: 8px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Links */
+.link {
+  margin-top: 12px;
+  color: orange;
+  cursor: pointer;
+}
+
+/* Hover effect */
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Navbar layout */
+.navbar {
+  background: orange;
+  padding: 15px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* User section */
+.user-section {
+  position: relative;
+}
+
+/* Icon */
+.user-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Dropdown box */
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background: white;
+  color: black;
+  padding: 10px;
+  border-radius: 8px;
+  width: 120px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+/* Dropdown button */
+.dropdown button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 5px;
+  background: orange;
+  border: none;
   color: white;
   cursor: pointer;
 }
