@@ -27,13 +27,6 @@ public class CartController {
         return service.getCart(userId);
     }
 
-    // ✅ Update quantity
-    @PutMapping("/{id}")
-    public CartItem update(@PathVariable Long id,
-                           @RequestParam int qty) {
-        return service.update(id, qty);
-    }
-
     // ✅ Delete item
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {
