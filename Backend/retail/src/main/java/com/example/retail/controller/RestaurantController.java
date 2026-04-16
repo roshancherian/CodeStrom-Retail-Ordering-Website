@@ -2,6 +2,12 @@ package com.example.retail.controller;
 
 import com.example.retail.entity.Restaurant;
 import com.example.retail.repository.RestaurantRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 

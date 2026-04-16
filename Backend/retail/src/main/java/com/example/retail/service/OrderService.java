@@ -23,6 +23,7 @@ public class OrderService {
     public Orders placeOrder(Long userId) {
 
         User user = userRepo.findById(userId).orElseThrow();
+
         List<CartItem> cartItems = cartRepo.findByUser(user);
 
         double total = cartItems.stream()
@@ -36,7 +37,6 @@ public class OrderService {
         order.setCreatedAt(LocalDateTime.now());
 
         orderRepo.save(order);
-
         cartRepo.deleteAll(cartItems);
 
         return order;

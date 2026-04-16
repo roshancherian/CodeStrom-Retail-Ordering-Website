@@ -1,4 +1,17 @@
 package com.example.retail.controller;
+
+import com.example.retail.entity.Orders;
+import com.example.retail.entity.User;
+import com.example.retail.repository.OrderRepository;
+import com.example.retail.repository.UserRepository;
+import com.example.retail.service.OrderService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.*;
+
 @RestController
 @RequestMapping("/api/orders")
 @RequiredArgsConstructor
@@ -10,8 +23,7 @@ public class OrderController {
 
     @PostMapping
     public Orders place() {
-        User user = userRepo.findById(1L).orElseThrow();
-        return service.placeOrder(user);
+        return service.placeOrder(1L); // ✅ pass userId
     }
 
     @GetMapping("/history")
