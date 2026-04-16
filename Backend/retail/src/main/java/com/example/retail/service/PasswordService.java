@@ -1,4 +1,5 @@
 package com.example.retail.service;
+
 import com.example.retail.entity.PasswordResetToken;
 import com.example.retail.entity.User;
 import com.example.retail.repository.PasswordResetTokenRepository;
@@ -19,27 +20,33 @@ public class PasswordService {
     private final PasswordEncoder encoder;
 
     public String forgot(String email) {
-        User user = userRepo.findByEmail(email).orElseThrow();
+        User user = userRepo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
         String token = UUID.randomUUID().toString();
 
-        PasswordResetToken t = new PasswordResetToken();
-        t.setUser(user);
-        t.setToken(token);
-        t.setExpiry(LocalDateTime.now().plusMinutes(10));
+        PasswordResetToken resetToken = new PasswordResetToken();
+        resetToken.setUser(user);
+        resetToken.setToken(token);
+        resetToken.setExpiry(LocalDateTime.now().plusMinutes(10));
 
-        tokenRepo.save(t);
+        tokenRepo.save(resetToken);
+
         return token;
     }
 
     public void reset(String token, String newPassword) {
-        PasswordResetToken t = tokenRepo.findByToken(token).orElseThrow();
+        PasswordResetToken resetToken = tokenRepo.findByToken(token)
+                .orElseThrow(() -> new RuntimeException("Invalid token"));
 
-        if (t.getExpiry().isBefore(LocalDateTime.now()))
-            throw new RuntimeException("Expired");
+        if (resetToken.getExpiry().isBefore(LocalDateTime.now())) {
+            throw new RuntimeException("Token expired");
+        }
 
-        User user = t.getUser();
+        User user = resetToken.getUser();
         user.setPassword(encoder.encode(newPassword));
         userRepo.save(user);
+
+        tokenRepo.delete(resetToken);
     }
 }

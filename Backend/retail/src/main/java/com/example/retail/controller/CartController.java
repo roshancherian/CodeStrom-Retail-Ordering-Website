@@ -15,26 +15,22 @@ public class CartController {
 
     private final CartService service;
 
-    // ✅ Add to cart
     @PostMapping
     public CartItem add(@RequestBody CartRequest req) {
         return service.addToCart(req.getUserId(), req.getMenuId(), req.getQty());
     }
 
-    // ✅ Get cart by user
     @GetMapping
     public List<CartItem> get(@RequestParam Long userId) {
         return service.getCart(userId);
     }
 
-    // ✅ Update quantity
     @PutMapping("/{id}")
     public CartItem update(@PathVariable Long id,
                            @RequestParam int qty) {
         return service.update(id, qty);
     }
 
-    // ✅ Delete item
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {
         service.delete(id);

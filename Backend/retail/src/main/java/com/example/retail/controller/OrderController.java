@@ -19,7 +19,6 @@ public class OrderController {
     private final UserRepository userRepo;
     private final OrderRepository repo;
 
-    // ✅ POST with request body
     @PostMapping
     public Orders place(@RequestBody Map<String, Long> req) {
 
@@ -28,7 +27,6 @@ public class OrderController {
         return service.placeOrder(userId);
     }
 
-    // ✅ GET with parameter
     @GetMapping("/history")
     public List<Orders> history(@RequestParam Long userId) {
 
