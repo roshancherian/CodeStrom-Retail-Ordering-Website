@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "../styles/login.css";
 
@@ -18,7 +19,9 @@ const SignupCard = ({ onSignup }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSignup(form);
+
   };
+  const navigate = useNavigate();
 
   return (
     <div className="card">
@@ -35,9 +38,12 @@ const SignupCard = ({ onSignup }) => {
         <button type="submit" className="btn primary">
           Sign Up
         </button>
+
+        
       </form>
 
-      <button className="btn secondary">Login</button>
+      <button className="btn secondary"
+      onClick={() => navigate("/")}>Login</button>
     </div>
   );
 };

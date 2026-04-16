@@ -1,19 +1,25 @@
+import { useState } from "react";
 import SignupCard from "../components/SignupCard";
 import { registerUser } from "../services/authService";
 
 const SignupPage = () => {
+  const [message, setMessage] = useState("");
+
   const handleSignup = async (data) => {
     try {
       const res = await registerUser(data);
-      console.log("Signup success:", res);
+      setMessage(res.message); // ✅ success
     } catch (err) {
-      console.error("Signup failed:", err);
+      setMessage(err); // ❌ error
     }
   };
 
   return (
     <div className="page">
-      <SignupCard onSignup={handleSignup} />
+      <div>
+        <SignupCard onSignup={handleSignup} />
+        {message && <p style={{ textAlign: "center" }}>{message}</p>}
+      </div>
     </div>
   );
 };
