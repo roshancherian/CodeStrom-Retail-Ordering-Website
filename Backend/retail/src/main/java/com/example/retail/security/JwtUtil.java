@@ -1,28 +1,20 @@
 package com.example.retail.security;
+import org.springframework.stereotype.Component;
+
+import java.util.Base64;
 
 @Component
 public class JwtUtil {
 
-    private final String SECRET = "mySecretKeyForHackathonProject";
-
     public String generateToken(String email) {
-        return Jwts.builder()
-                .setSubject(email)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 86400000))
-                .signWith(SignatureAlgorithm.HS256, SECRET)
-                .compact();
+        return Base64.getEncoder().encodeToString(email.getBytes());
     }
 
-    public String extractEmail(String token) {
-        return Jwts.parser()
-                .setSigningKey(SECRET)
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+    public String getEmail(String token) {
+        return new String(Base64.getDecoder().decode(token));
     }
 
-    public boolean validateToken(String token, String email) {
-        return extractEmail(token).equals(email);
+    public boolean isValid(String token, String email) {
+        return getEmail(token).equals(email);
     }
 }
