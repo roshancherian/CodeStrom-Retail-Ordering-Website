@@ -1,9 +1,11 @@
 import { useState } from "react";
 import "../styles/login.css";
+import { useNavigate } from "react-router-dom";
 
 const LoginCard = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,7 +38,12 @@ const LoginCard = ({ onLogin }) => {
         </button>
       </form>
 
-      <button className="btn secondary">Sign Up</button>
+      <button
+  className="btn secondary"
+  onClick={() => navigate("/signup")}
+>
+  Sign Up
+</button>
       <button className="btn link">Forgot Password?</button>
     </div>
   );
