@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router-dom";
+import OrderHistoryPage from "./pages/OrderHistoryPage";
 
+<Route path="/orders" element={<OrderHistoryPage />} />
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
@@ -22,6 +24,7 @@ function App() {
         <Route path="/menu/:id" element={<MenuPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/forgot" element={<ForgotPasswordPage />} />
+        <Route path="/orders" element={<OrderHistoryPage />} />
         <Route path="/reset" element={<ResetPasswordPage />} />
       </Routes>
     </>
