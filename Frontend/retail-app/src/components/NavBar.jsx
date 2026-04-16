@@ -21,47 +21,37 @@ function NavBar() {
       </h2>
 
       {/* RIGHT */}
-      {user && (
-        <div className="user-section">
+      <div className="user-section">
 
-          <div
-            className="user-icon"
-            onClick={() => setOpen(!open)}
-          >
-            👤
-          </div>
-
-          {open && (
-            <div className="dropdown">
-
-              {/* USER NAME */}
-              <p className="username">{user.name}</p>
-
-              {/* CART */}
-              <p onClick={() => {
-                navigate("/cart");
-                setOpen(false);
-              }}>
-                🛒 Cart
-              </p>
-
-              {/* ORDER HISTORY */}
-              <p onClick={() => {
-                navigate("/orders");
-                setOpen(false);
-              }}>
-                📜 Orders
-              </p>
-
-              {/* LOGOUT */}
-              <button onClick={logout}>
-                Logout
-              </button>
-
-            </div>
-          )}
+        {/* ICON ALWAYS VISIBLE */}
+        <div
+          className="user-icon"
+          onClick={() => {
+            if (!user) {
+              navigate("/login"); // go to login if not logged
+            } else {
+              setOpen(!open);
+            }
+          }}
+        >
+          👤
         </div>
-      )}
+
+        {/* DROPDOWN ONLY IF LOGGED IN */}
+        {user && open && (
+          <div className="dropdown">
+
+            <p className="username">{user.name}</p>
+
+            <p onClick={() => navigate("/cart")}>🛒 Cart</p>
+
+            <p onClick={() => navigate("/orders")}>📜 Orders</p>
+
+            <button onClick={logout}>Logout</button>
+
+          </div>
+        )}
+      </div>
     </div>
   );
 }

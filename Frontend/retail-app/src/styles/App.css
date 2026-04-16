@@ -221,3 +221,19 @@ body {
 .status.cancelled {
   color: red;
 }
+
+/* Search bar container */
+.search-box {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+/* Input */
+.search-box input {
+  width: 300px;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+}

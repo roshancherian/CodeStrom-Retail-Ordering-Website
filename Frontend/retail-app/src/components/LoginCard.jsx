@@ -10,18 +10,22 @@ function LoginCard() {
 
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    try {
-      const res = await login(data);
+ const handleLogin = async () => {
+  try {
+    const res = await login(data);
 
-      localStorage.setItem("user", JSON.stringify(res.data));
+    console.log("LOGIN DATA:", res.data); // ✅ check this
 
-      alert("Login successful");
-      navigate("/");
-    } catch (error) {
-      alert("Invalid credentials");
-    }
-  };
+    // ✅ STORE USER PROPERLY
+    localStorage.setItem("user", JSON.stringify(res.data));
+
+    // ✅ GO TO HOME
+    window.location.href = "/";  // 🔥 force reload (important)
+    
+  } catch (err) {
+    alert("Invalid credentials");
+  }
+};
 
   return (
     <div className="login-container">
