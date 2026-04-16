@@ -1,23 +1,30 @@
 import { Routes, Route } from "react-router-dom";
+
+import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage";
-import HomePage from "./pages/HomePage";
-import ProfilePage from "./pages/ProfilePage";
 import CartPage from "./pages/CartPage";
+import MenuPage from "./pages/MenuPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
+
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<LoginPage />} />
-      <Route path="/signup" element={<SignupPage />} />
-      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/" element={<LoginPage />} />
-  <Route path="/home" element={<HomePage />} />
-  <Route path="/profile" element={<ProfilePage />} />
-  <Route path="/cart" element={<CartPage />} />
-    </Routes>
-    
+    <>
+      <NavBar />
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/menu/:id" element={<MenuPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/forgot" element={<ForgotPasswordPage />} />
+        <Route path="/reset" element={<ResetPasswordPage />} />
+      </Routes>
+    </>
   );
 }
 

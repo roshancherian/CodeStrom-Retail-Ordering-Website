@@ -1,17 +1,28 @@
-const RestaurantList = ({ restaurants, onSelect }) => {
+import { useEffect, useState } from "react";
+import { getRestaurants } from "../services/restaurantService";
+import { useNavigate } from "react-router-dom";
+
+function RestaurantList() {
+  const [data, setData] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getRestaurants().then(res => setData(res.data));
+  }, []);
+
   return (
-    <div className="restaurant-list">
-      {restaurants.map((res) => (
-        <div
-          key={res.id}
-          className="restaurant-card"
-          onClick={() => onSelect(res)}
-        >
-          <h3>{res.name}</h3>
+    <div className="grid">
+      {data.map(r => (
+        <div className="card"
+          key={r.id}
+          onClick={() => navigate(`/menu/${r.id}`)}>
+
+          <h3>{r.name}</h3>
+          <p>View Menu →</p>
         </div>
       ))}
     </div>
   );
-};
+}
 
 export default RestaurantList;

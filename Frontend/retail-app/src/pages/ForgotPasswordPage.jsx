@@ -1,20 +1,11 @@
 import ForgotPasswordCard from "../components/ForgotPasswordCard";
-import {
-  sendOtp,
-  verifyOtp,
-  resetPassword,
-} from "../services/authService";
 
-const ForgotPasswordPage = () => {
+function ForgotPasswordPage() {
   return (
-    <div className="page">
-      <ForgotPasswordCard
-        sendOtp={sendOtp}
-        verifyOtp={verifyOtp}
-        resetPassword={resetPassword}
-      />
+    <div style={{ display: "flex", justifyContent: "center", marginTop: "50px" }}>
+      <ForgotPasswordCard />
     </div>
   );
-};
+}
 
 export default ForgotPasswordPage;

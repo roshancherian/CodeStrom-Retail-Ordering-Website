@@ -1,51 +1,36 @@
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import "../styles/login.css";
+import { signup } from "../services/authService";
+import { useNavigate } from "react-router-dom";
 
-const SignupCard = ({ onSignup }) => {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    password: "",
-    confirmPassword: "",
+function SignupCard() {
+  const [user, setUser] = useState({
+    name: "", email: "", password: ""
   });
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSignup(form);
-
-  };
   const navigate = useNavigate();
+
+  const handleSignup = async () => {
+    await signup(user);
+    alert("Account Created");
+    navigate("/login");
+  };
 
   return (
     <div className="card">
-      <h2>Sign Up</h2>
+      <h2>Signup</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input name="name" placeholder="Name" onChange={handleChange} required />
-        <input name="email" type="email" placeholder="Email" onChange={handleChange} required />
-        <input name="phone" placeholder="Phone" onChange={handleChange} required />
-        <input name="address" placeholder="Address" onChange={handleChange} required />
-        <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
-        <input name="confirmPassword" type="password" placeholder="Confirm Password" onChange={handleChange} required />
+      <input placeholder="Name"
+        onChange={(e) => setUser({ ...user, name: e.target.value })} />
 
-        <button type="submit" className="btn primary">
-          Sign Up
-        </button>
+      <input placeholder="Email"
+        onChange={(e) => setUser({ ...user, email: e.target.value })} />
 
-        
-      </form>
+      <input type="password" placeholder="Password"
+        onChange={(e) => setUser({ ...user, password: e.target.value })} />
 
-      <button className="btn secondary"
-      onClick={() => navigate("/")}>Login</button>
+      <button onClick={handleSignup}>Signup</button>
     </div>
   );
-};
+}
 
 export default SignupCard;

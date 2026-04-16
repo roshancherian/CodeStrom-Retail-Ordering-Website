@@ -1,43 +1,34 @@
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import ProfileDropdown from "./ProfileDropdown";
+import { Link, useNavigate } from "react-router-dom";
 
-const Navbar = () => {
-  const [open, setOpen] = useState(false);
+function NavBar() {
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const logout = () => {
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
 
   return (
-    <nav className="navbar">
-      {/* Left */}
-      <div className="nav-left">
-        <h2 style={{ cursor: "pointer" }} onClick={() => navigate("/home")}>
-          RetailApp
-        </h2>
+    <div className="navbar">
+      <h2>🍔 FoodApp</h2>
+
+      <div>
+        <Link to="/">Home</Link>
+
+        {user ? (
+          <>
+            <Link to="/cart">Cart</Link>
+            <button onClick={logout}>Logout</button>
+          </>
+        ) : (
+          <>
+            <Link to="/login">Login</Link>
+          </>
+        )}
       </div>
-
-      {/* Center */}
-      <div className="nav-center">
-        <input
-          type="text"
-          placeholder="Search products..."
-          className="search-bar"
-        />
-      </div>
-
-      {/* Right */}
-      <div className="nav-right">
-        <button onClick={() => navigate("/home")} className="home-btn">
-          Home
-        </button>
-
-        <div onClick={() => setOpen(!open)} className="profile">
-          👤
-        </div>
-
-        {open && <ProfileDropdown />}
-      </div>
-    </nav>
+    </div>
   );
-};
+}
 
-export default Navbar;
+export default NavBar;

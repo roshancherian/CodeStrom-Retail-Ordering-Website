@@ -1,73 +1,31 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { getMenuByRestaurant } from "../services/menuService";
+import { addToCart } from "../services/cartService";
 
-const MenuList = ({ restaurant }) => {
-  const [cart, setCart] = useState([]);
+function MenuList({ restId }) {
+  const [menu, setMenu] = useState([]);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCart(savedCart);
+    getMenuByRestaurant(restId).then(res => setMenu(res.data));
   }, []);
 
-  const updateCart = (newCart) => {
-    setCart(newCart);
-    localStorage.setItem("cart", JSON.stringify(newCart));
+  const add = async (id) => {
+    await addToCart({ userId: user.id, menuId: id, qty: 1 });
+    alert("Added!");
   };
-
-  const getQty = (item) => {
-    const found = cart.find((c) => c.name === item.name);
-    return found ? found.quantity : 0;
-  };
-
-  const increaseQty = (item) => {
-    let newCart = [...cart];
-    const index = newCart.findIndex((c) => c.name === item.name);
-
-    if (index > -1) {
-      newCart[index].quantity += 1;
-    } else {
-      newCart.push({ ...item, quantity: 1 });
-    }
-
-    updateCart(newCart);
-  };
-
-  const decreaseQty = (item) => {
-    let newCart = [...cart];
-    const index = newCart.findIndex((c) => c.name === item.name);
-
-    if (index > -1) {
-      if (newCart[index].quantity > 1) {
-        newCart[index].quantity -= 1;
-      } else {
-        newCart.splice(index, 1);
-      }
-    }
-
-    updateCart(newCart);
-  };
-
-  if (!restaurant) {
-    return <h3>Select a restaurant 🍽️</h3>;
-  }
 
   return (
-    <div className="menu-list">
-      <h2>{restaurant.name} Menu</h2>
-
-      {restaurant.menu.map((item, index) => (
-        <div key={index} className="menu-item">
-          <span>{item.name} - ₹{item.price}</span>
-
-          {/* Quantity Controls */}
-          <div>
-            <button onClick={() => decreaseQty(item)}>-</button>
-            <span style={{ margin: "0 10px" }}>{getQty(item)}</span>
-            <button onClick={() => increaseQty(item)}>+</button>
-          </div>
+    <div className="grid">
+      {menu.map(m => (
+        <div className="card" key={m.id}>
+          <h4>{m.name}</h4>
+          <p>₹{m.price}</p>
+          <button onClick={() => add(m.id)}>Add</button>
         </div>
       ))}
     </div>
   );
-};
+}
 
 export default MenuList;
