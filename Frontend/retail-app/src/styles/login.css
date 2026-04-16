@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #ff4d4d; /* 🔴 red background */
+}
+
+.page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  background: #fff176; /* 🟡 yellow card */
+  padding: 30px;
+  width: 300px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.card input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.primary {
+  background: #007bff;
+  color: white;
+}
+
+.primary:hover {
+  background: #0056b3;
+}
+
+.secondary {
+  background: #28a745;
+  color: white;
+}
+
+.secondary:hover {
+  background: #1e7e34;
+}
+
+.link {
+  background: transparent;
+  color: #007bff;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
